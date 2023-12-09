@@ -38,8 +38,8 @@ Users should be able to:
 
 ### Links
 
--   Solution URL: [Solution URL ](https://github.com/Andro87/frontend-quiz-app.git)
--   Live Site URL: [Live site URL ](https://frontend-quiz-app-rosy.vercel.app/)
+-   SOLUTION URL: [Solution URL ](https://github.com/Andro87/frontend-quiz-app.git)
+-   LIVE SITE URL: [Live site URL ](https://frontend-quiz-app-rosy.vercel.app/)
 
 ## My process
 
