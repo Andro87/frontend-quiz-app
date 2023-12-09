@@ -1,0 +1,19 @@
+@use "styles/helpers" as *;
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 100%;
+    @include breakpoint($medium) {
+        font-size: 4rem;
+    }
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 120%;
+    @include breakpoint($medium) {
+        font-size: 2.25rem;
+    }
+}

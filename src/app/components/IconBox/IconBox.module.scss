@@ -1,0 +1,36 @@
+@use "styles/helpers" as *;
+
+.icon_container {
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 6px;
+    border-radius: 5px;
+    @include breakpoint($medium) {
+        width: 3.5rem;
+        height: 3.5rem;
+        padding: 8px;
+    }
+    img {
+        max-width: 100%;
+    }
+}
+
+.html {
+    background-color: var(--html);
+    background-repeat: no-repeat;
+}
+
+.css {
+    background-color: var(--css);
+    background-repeat: no-repeat;
+}
+
+.javascript {
+    background-color: var(--javascript);
+    background-repeat: no-repeat;
+}
+.accessibility {
+    background-color: var(--accessibility);
+    background-repeat: no-repeat;
+}

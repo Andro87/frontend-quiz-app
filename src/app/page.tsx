@@ -1,95 +1,136 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import styles from "./page.module.scss";
+
+import { useState, useEffect } from "react";
+
+import { Header, StartQuiz, Quiz, QuizResult } from "./components";
+
+import data from "allData/data.json";
+
+import { Question } from "./modal/data";
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    const [subject, setSubject] = useState("");
+
+    const [questionsData, setQuestionsData] = useState<Question[]>();
+
+    const [currentQuestionPosition, setCurrentQuestionPosition] = useState(0);
+
+    const [answer, setAnswer] = useState("");
+
+    const [checkAnswer, setCheckAnswer] = useState("");
+
+    const [isMessage, setIsMessage] = useState(false);
+
+    const [isQuizCompleted, setIsQuizCompleted] = useState(false);
+
+    const [score, setScore] = useState(0);
+
+    const handleData = (userChoice: string) => {
+        return data.quizzes.filter(quiz => quiz.title === userChoice);
+    };
+
+    const handleStartBtn = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSubject(e.target.value);
+    };
+
+    const handleAnswerBtn = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAnswer(e.target.value);
+    };
+
+    const handleSubmitAnswer = () => {
+        if (!answer) {
+            setIsMessage(true);
+            setCheckAnswer("");
+        }
+
+        if (answer === questionsData?.[currentQuestionPosition].answer) {
+            setCheckAnswer("correct_answer");
+            setScore(prevValue => prevValue + 1);
+        }
+        if (
+            answer &&
+            answer !== questionsData?.[currentQuestionPosition].answer
+        ) {
+            setCheckAnswer("incorrect_answer");
+        }
+    };
+
+    const handleNextQuestion = () => {
+        if (
+            questionsData &&
+            currentQuestionPosition + 1 < questionsData?.length
+        ) {
+            setCurrentQuestionPosition(prev => prev + 1);
+            setIsMessage(false);
+            setAnswer("");
+            setCheckAnswer("");
+        }
+        if (questionsData?.length === currentQuestionPosition + 1) {
+            setIsQuizCompleted(true);
+        }
+    };
+
+    const handleStartGame = () => {
+        setIsQuizCompleted(false);
+        setSubject("");
+        setCurrentQuestionPosition(0);
+        setCheckAnswer("");
+        setAnswer("");
+    };
+
+    useEffect(() => {
+        if (subject) {
+            const questions = handleData(subject)[0].questions;
+            setQuestionsData(questions);
+        }
+    }, [subject]);
+
+    return (
+        <div className={styles.home}>
+            <div className={styles.home_container}>
+                <Header subject={subject} />
+
+                <main className={styles.main}>
+                    {!subject && (
+                        <StartQuiz
+                            userChoice={subject}
+                            onRadioBtn={handleStartBtn}
+                        />
+                    )}
+
+                    {subject && !isQuizCompleted && (
+                        <Quiz
+                            questionNumber={currentQuestionPosition + 1}
+                            question={
+                                questionsData?.[currentQuestionPosition]
+                                    .question
+                            }
+                            answers={
+                                questionsData?.[currentQuestionPosition].options
+                            }
+                            userChoice={answer}
+                            onAnswerBtn={handleAnswerBtn}
+                            checkAnswer={checkAnswer}
+                            correctAnswer={
+                                questionsData?.[currentQuestionPosition].answer
+                            }
+                            onSubmitAnswer={handleSubmitAnswer}
+                            onNextQuestion={handleNextQuestion}
+                            message={isMessage}
+                        />
+                    )}
+
+                    {isQuizCompleted && (
+                        <QuizResult
+                            subject={subject}
+                            score={score}
+                            onStartGame={handleStartGame}
+                        />
+                    )}
+                </main>
+            </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    );
 }

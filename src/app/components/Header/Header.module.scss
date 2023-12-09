@@ -1,0 +1,65 @@
+@use "styles/helpers" as *;
+
+.header {
+    display: flex;
+    padding-block: 1rem;
+    @include breakpoint($medium) {
+        padding-block: 2.5rem;
+    }
+    @include breakpoint($large) {
+        padding-block: 5rem;
+    }
+}
+.subject_container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    p {
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 120%;
+        @include breakpoint($medium) {
+            font-size: 1.75rem;
+        }
+    }
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 16px;
+
+    &_wrap {
+        width: 32px;
+        height: 20px;
+        padding: 0.25rem;
+        background-color: var(--purple);
+        border-radius: 62.4rem;
+        display: flex;
+        align-items: center;
+
+        @include breakpoint($medium) {
+            width: 48px;
+            height: 28px;
+            padding: 0.25rem;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &_circle {
+        background-color: var(--pure-white);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+
+        @include breakpoint($medium) {
+            width: 20px;
+            height: 20px;
+        }
+    }
+    &_circle_dark {
+        margin-left: auto;
+    }
+}

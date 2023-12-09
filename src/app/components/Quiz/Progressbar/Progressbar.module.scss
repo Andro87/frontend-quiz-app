@@ -1,0 +1,16 @@
+@use "styles/helpers" as *;
+
+.progressbar_container {
+    background-color: var(--box);
+    padding: 0.25rem;
+    border-radius: 62.5rem;
+    height: 16px;
+    @include breakpoint($large) {
+        margin-top: 10rem;
+    }
+}
+.progressbar {
+    background-color: var(--purple);
+    border-radius: 6.5rem;
+    height: 8px;
+}

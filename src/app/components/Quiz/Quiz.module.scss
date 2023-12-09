@@ -1,0 +1,180 @@
+@use "styles/helpers" as *;
+
+.section_quiz {
+    @include container($large);
+}
+
+.question_container {
+    h2 {
+        margin-top: 0.75rem;
+        margin-bottom: 1.5rem;
+        @include breakpoint($medium) {
+            margin-top: 1.7rem;
+            margin-bottom: 2.5rem;
+        }
+    }
+    span {
+        color: var(--subtitle);
+        font-size: 0.875rem;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 150%;
+        @include breakpoint($medium) {
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.answers_container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    @include breakpoint($medium) {
+        gap: 1.5rem;
+    }
+}
+
+.answer_container {
+    border: 3px solid none;
+    background: var(--box);
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0px 16px 40px 0px rgba(143, 160, 193, 0.14);
+
+    @include breakpoint($medium) {
+        border-radius: 1.5rem;
+    }
+    @include breakpoint($large) {
+        padding: 1.125rem;
+    }
+
+    &:hover {
+        span {
+            background-color: var(--light-violet);
+            color: var(--purple);
+        }
+    }
+
+    input {
+        position: fixed;
+        width: 0;
+        height: 0;
+    }
+    label {
+        font-size: 1.125rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        cursor: pointer;
+        @include breakpoint($medium) {
+            font-size: 1.75rem;
+            gap: 2rem;
+        }
+        span {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 5px;
+            background-color: var(--light-grey);
+            color: var(--grey-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @include transition;
+            @include breakpoint($medium) {
+                width: 3.5rem;
+                height: 3.5rem;
+            }
+        }
+        svg {
+            margin-left: auto;
+        }
+    }
+}
+
+.isActive {
+    border: 3px solid var(--purple);
+    label {
+        span {
+            background-color: var(--purple);
+            color: var(--pure-white);
+        }
+    }
+}
+.correct_answer {
+    border: 3px solid var(--green);
+    label {
+        span {
+            background-color: var(--green);
+            color: var(--pure-white);
+        }
+    }
+}
+.incorrect_answer {
+    border: 3px solid var(--red);
+    label {
+        span {
+            background-color: var(--red);
+            color: var(--pure-white);
+        }
+    }
+}
+
+.btns_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+
+    @include breakpoint($medium) {
+        margin-top: 2rem;
+    }
+}
+.btn_submit,
+.btn_next {
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    background: var(--purple);
+    color: var(--pure-white);
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 100%;
+    text-transform: capitalize;
+    border-radius: 1.5rem;
+    box-shadow: 0px 16px 40px 0px rgba(49, 62, 81, 0.14);
+    @include transition;
+    @include breakpoint($medium) {
+        font-size: 1.75rem;
+        padding: 2rem;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.5) 0%,
+                rgba(255, 255, 255, 0.5) 100%
+            )
+            var(--purple);
+    }
+}
+
+.message {
+    color: var(--red);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-inline: auto;
+    margin-top: 0.75rem;
+    @include breakpoint($medium) {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
+    span {
+        margin-right: 8px;
+    }
+}

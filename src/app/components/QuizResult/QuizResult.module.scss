@@ -1,0 +1,108 @@
+@use "styles/helpers" as *;
+
+.section_result {
+    @include container($large);
+    span {
+        font-weight: 500;
+    }
+}
+
+.result_intro {
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        line-height: 100%;
+        @include breakpoint($medium) {
+            font-size: 4rem;
+        }
+    }
+}
+
+.result_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    @include breakpoint($medium) {
+        gap: 2rem;
+    }
+}
+
+.result {
+    padding: 2rem;
+    border-radius: 0.75rem;
+    background-color: var(--box);
+    @include breakpoint($medium) {
+        border-radius: 1.5rem;
+        padding: 3rem;
+    }
+
+    &_subject {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        @include breakpoint($medium) {
+            gap: 1.5rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            font-weight: 500;
+            line-height: 100%;
+            @include breakpoint($medium) {
+                font-size: 1.75rem;
+            }
+        }
+    }
+
+    &_wrapper {
+        color: var(--subtitle);
+        font-size: 1.125rem;
+        font-weight: 400;
+        line-height: 100%;
+        text-align: center;
+        @include breakpoint($medium) {
+            font-size: 1.5rem;
+        }
+        span {
+            display: block;
+            font-size: 5.5rem;
+            font-weight: 500;
+            line-height: 100%;
+            color: var(--main-text);
+            margin-block: 1rem;
+            @include breakpoint($medium) {
+                font-size: 9rem;
+                margin-top: 2.5rem;
+            }
+        }
+    }
+}
+
+.btn_start {
+    border-radius: 12px;
+    border: none;
+    background: var(--purple);
+    color: var(--pure-white);
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 100%;
+    text-transform: capitalize;
+    padding: 0.75rem;
+    @include transition;
+    @include breakpoint($medium) {
+        font-size: 1.75rem;
+        border-radius: 24px;
+        padding: 2rem;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.5) 0%,
+                rgba(255, 255, 255, 0.5) 100%
+            ),
+            var(--purple);
+    }
+}
